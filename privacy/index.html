@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sabura privacy policy</title>
+  <meta name="description" content="What the Sabura connector and website receive, what they keep, and who else is involved.">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../" aria-label="Sabura home">
+        <svg viewBox="0 0 1024 1024" aria-hidden="true"><g transform="scale(32)" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="16" rx="3"/><path d="M12 8V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/><path d="m13 20 10-10m-5 0h5v5"/></g></svg>
+        Sabura
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="../docs/">Docs</a>
+        <a href="./" aria-current="page">Privacy</a>
+        <a href="https://kasfreedom.github.io/sabura-editor/">Editor</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap page">
+    <article>
+      <h1>Privacy policy</h1>
+      <p class="meta">Effective 22 November 2026</p>
+
+      <p>This policy covers the Sabura connector for Claude (<code>https://sabura-connector.fly.dev/mcp</code>), the Sabura editor, and this website. In short: Sabura stores no boards, has no accounts, and uses no cookies, analytics or advertising.</p>
+
+      <h2 id="connector">The Sabura connector</h2>
+      <h3>What it receives</h3>
+      <p>When Claude creates or opens a board, the connector receives the board title and the drawing commands Claude sends, such as shapes, labels and arrows. Labels can contain whatever you or Claude wrote on the board.</p>
+      <h3>How it uses it</h3>
+      <p>The connector turns those commands into a board in memory, sends the board back to Claude, and discards it. It doesn’t save boards, labels or commands, and doesn’t use them for anything else.</p>
+      <h3>Edits made later</h3>
+      <p>Once a board is open in your chat, your edits and Claude’s edits happen inside Claude, between Claude and the board. They are not sent to the Sabura connector.</p>
+      <h3>Technical data</h3>
+      <p>To limit how many requests one sender can make, the connector keeps a request count per IP address in memory. The counts are never written to disk, and they disappear when the server restarts or a sender goes quiet. If a board fails to build because of a fault in Sabura, the connector writes technical error details to the server log. It doesn’t log board content for requests that succeed.</p>
+
+      <h2 id="editor">The Sabura editor and saved files</h2>
+      <p>The editor runs entirely in your browser. Boards you save with Save Copy are files on your device, and they make no network requests when opened. The editor remembers one setting in your browser, the light or dark interface theme, and it is never sent anywhere.</p>
+
+      <h2 id="website">This website</h2>
+      <p>This website sets no cookies and loads nothing from third parties. It is hosted on GitHub Pages, and GitHub may log technical data such as visitors’ IP addresses under its own privacy statement.</p>
+
+      <h2 id="third-parties">Services involved</h2>
+      <table>
+        <thead><tr><th scope="col">Service</th><th scope="col">Role</th></tr></thead>
+        <tbody>
+          <tr><td>Fly.io</td><td>Hosts the Sabura connector. It handles network traffic to the server and keeps platform logs under <a href="https://fly.io/legal/privacy-policy">its privacy policy</a>.</td></tr>
+          <tr><td>GitHub</td><td>Hosts this website and the editor. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub’s privacy statement</a>.</td></tr>
+          <tr><td>Anthropic</td><td>Runs Claude. Your conversations, including boards shown in them, are covered by Anthropic’s privacy policy, not this one.</td></tr>
+        </tbody>
+      </table>
+      <p>Sabura doesn’t sell or share data with anyone else.</p>
+
+      <h2 id="retention">How long data is kept</h2>
+      <p>Board content isn’t kept at all. Request counts stay in memory for minutes at most. Error details stay in the server log for as long as Fly.io retains it.</p>
+
+      <h2 id="changes">Changes</h2>
+      <p>If this policy changes, this page will show the new effective date at the top.</p>
+
+      <h2 id="contact">Contact</h2>
+      <p>Questions about privacy go to the <a href="https://github.com/kasfreedom/sabura-editor/issues">Sabura issue tracker</a>.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Sabura is open source under the MIT license.</span>
+      <nav aria-label="Footer">
+        <a href="../docs/">Docs</a>
+        <a href="./">Privacy</a>
+        <a href="https://github.com/kasfreedom/sabura-editor">Source</a>
+        <a href="https://github.com/kasfreedom/sabura-editor/issues">Support</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

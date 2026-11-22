@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sabura: diagrams Claude draws, in a file you keep</title>
+  <meta name="description" content="Sabura is a whiteboard for Claude. Ask for a diagram, edit it in the chat, and save it as one HTML file anyone can open, change and share. No account, works offline.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./" aria-label="Sabura home">
+        <svg viewBox="0 0 1024 1024" aria-hidden="true"><g transform="scale(32)" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="16" rx="3"/><path d="M12 8V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/><path d="m13 20 10-10m-5 0h5v5"/></g></svg>
+        Sabura
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="docs/">Docs</a>
+        <a href="privacy/">Privacy</a>
+        <a href="https://kasfreedom.github.io/sabura-editor/">Editor</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">Diagrams Claude draws, in a file you keep.</h1>
+        <p class="lede">Sabura is a whiteboard for Claude. Ask for a diagram, change it right in the chat, and save it as one HTML file that anyone can open, edit and pass on. No account, nothing to install, works offline.</p>
+        <div class="actions">
+          <a class="button" href="#add">Add Sabura to Claude</a>
+          <a href="https://kasfreedom.github.io/sabura-editor/">Or start a blank board</a>
+        </div>
+      </div>
+      <figure class="board-frame">
+        <iframe data-src="board/" title="A live Sabura board explaining how Sabura works"></iframe>
+        <figcaption>A live Sabura board. Drag a shape, or <a href="board/index.html" download="how-sabura-works.html">download it</a> and open it on your computer.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" aria-labelledby="what-title">
+      <div class="wrap">
+        <h2 id="what-title">What you get</h2>
+        <dl class="facts">
+          <div>
+            <dt>One file, editor included</dt>
+            <dd>Save Copy writes the board and the editor into a single HTML file. Open it years from now and it still works, with no service behind it.</dd>
+          </div>
+          <div>
+            <dt>Edits Claude can see</dt>
+            <dd>Move a box or rename a label in the chat, and Claude picks up what you changed before it adds anything else.</dd>
+          </div>
+          <div>
+            <dt>Opens anywhere</dt>
+            <dd>Any modern browser, on any computer, offline. The person you send it to needs no account and no app.</dd>
+          </div>
+          <div>
+            <dt>Nothing kept on our side</dt>
+            <dd>The Sabura connector builds a board and forgets it. Your boards live in your chats and your files. <a href="privacy/">Privacy details</a></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="add" aria-labelledby="add-title">
+      <div class="wrap">
+        <h2 id="add-title">Add Sabura to Claude</h2>
+        <ol class="steps">
+          <li>
+            <strong>Open your connectors in Claude</strong>
+            In Claude, go to Settings, then Connectors, and choose Add custom connector.
+          </li>
+          <li>
+            <strong>Paste the Sabura address</strong>
+            Name it Sabura and paste this address. Sabura needs no sign-in.
+            <div class="copy-field">
+              <input id="mcp-url" type="text" value="https://sabura-connector.fly.dev/mcp" readonly aria-label="Sabura connector address">
+              <button type="button" data-copy="mcp-url">Copy</button>
+            </div>
+          </li>
+          <li>
+            <strong>Ask for a board</strong>
+            Try “Draw our sign-up flow on a Sabura board.” The board opens in the chat, ready to edit.
+          </li>
+        </ol>
+        <p class="note">Don’t see Add custom connector? Your Claude plan or your organization may not allow custom connectors. The <a href="docs/">docs</a> cover this and other common problems.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Sabura is open source under the MIT license.</span>
+      <nav aria-label="Footer">
+        <a href="docs/">Docs</a>
+        <a href="privacy/">Privacy</a>
+        <a href="https://github.com/kasfreedom/sabura-editor">Source</a>
+        <a href="https://github.com/kasfreedom/sabura-editor/issues">Support</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // The editor fits the board to its window once, at load. Load it after the
+    // page has laid out so it measures the frame at its real size.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      for (const frame of document.querySelectorAll('iframe[data-src]')) frame.src = frame.dataset.src;
+    }));
+
+    // Copy the connector address. Falls back to selecting it where the
+    // clipboard is unavailable, so the visitor can copy it by hand.
+    for (const button of document.querySelectorAll('[data-copy]')) {
+      button.addEventListener('click', async () => {
+        const field = document.getElementById(button.dataset.copy);
+        try {
+          await navigator.clipboard.writeText(field.value);
+          button.textContent = 'Copied';
+          setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+        } catch (_) {
+          field.focus();
+          field.select();
+          button.textContent = 'Press ⌘C or Ctrl+C';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
