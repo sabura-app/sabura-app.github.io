@@ -26,7 +26,7 @@
   <main class="wrap page">
     <article>
       <h1>Privacy policy</h1>
-      <p class="meta">Effective 22 November 2026</p>
+      <p class="meta">Effective 23 November 2026</p>
 
       <p>This policy covers the Sabura connector for Claude (<code>https://sabura-connector.fly.dev/mcp</code>), the Sabura editor, and this website. In short: Sabura stores no boards, has no accounts, and uses no cookies, analytics or advertising.</p>
 
@@ -38,7 +38,9 @@
       <h3>Edits made later</h3>
       <p>Once a board is open in your chat, your edits and Claude’s edits happen inside Claude, between Claude and the board. They are not sent to the Sabura connector.</p>
       <h3>Technical data</h3>
-      <p>To limit how many requests one sender can make, the connector keeps a request count per IP address in memory. The counts are never written to disk, and they disappear when the server restarts or a sender goes quiet. If a board fails to build because of a fault in Sabura, the connector writes technical error details to the server log. It doesn’t log board content for requests that succeed.</p>
+      <p>To limit how many requests one sender can make, the connector keeps a request count per IP address in memory. The counts are never written to disk, and they disappear when the server restarts or a sender goes quiet. If a board fails to build because of a fault in Sabura, the connector writes technical error details to the server log.</p>
+      <h3>Usage records</h3>
+      <p>For each board the connector builds, it logs one line saying which tool ran, whether it worked and what kind of error it hit if not, how long it took, and how many commands, shapes and groups were involved. It also logs when a request was turned away for exceeding the rate limit. These records contain no titles, labels or other board content, and no IP addresses. They help us see whether Sabura works and where it fails.</p>
 
       <h2 id="editor">The Sabura editor and saved files</h2>
       <p>The editor runs entirely in your browser. Boards you save with Save Copy are files on your device, and they make no network requests when opened. The editor remembers one setting in your browser, the light or dark interface theme, and it is never sent anywhere.</p>
@@ -58,7 +60,7 @@
       <p>Sabura doesn’t sell or share data with anyone else.</p>
 
       <h2 id="retention">How long data is kept</h2>
-      <p>Board content isn’t kept at all. Request counts stay in memory for minutes at most. Error details stay in the server log for as long as Fly.io retains it.</p>
+      <p>Board content isn’t kept at all. Request counts stay in memory for minutes at most. Error details and usage records stay in the server log for as long as Fly.io retains it.</p>
 
       <h2 id="changes">Changes</h2>
       <p>If this policy changes, this page will show the new effective date at the top.</p>
