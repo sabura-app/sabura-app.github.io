@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sabura: diagrams Claude draws, in a file you keep</title>
-  <meta name="description" content="Sabura is a whiteboard for Claude. Ask for a diagram, edit it in the chat, and save it as one HTML file anyone can open, change and share. No account, works offline.">
+  <meta name="description" content="Sabura is a whiteboard for Claude. Ask for a diagram and get one HTML file anyone can open, edit and share. No account, no server, works offline.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -27,7 +27,7 @@
     <section class="wrap hero" aria-labelledby="hero-title">
       <div>
         <h1 id="hero-title">Diagrams Claude draws, in a file you keep.</h1>
-        <p class="lede">Sabura is a whiteboard for Claude. Ask for a diagram, change it right in the chat, and save it as one HTML file that anyone can open, edit and pass on. No account, nothing to install, works offline.</p>
+        <p class="lede">Sabura is a whiteboard for Claude. Ask for a diagram and Claude hands you one HTML file: it opens as a working editor, in the chat or in any browser, and anyone can edit it and pass it on. No account, no server, works offline.</p>
         <div class="actions">
           <a class="button" href="#add">Add Sabura to Claude</a>
           <a href="https://sabura-app.github.io/sabura-editor/">Or start a blank board</a>
@@ -48,16 +48,16 @@
             <dd>Save Copy writes the board and the editor into a single HTML file. Open it years from now and it still works, with no service behind it.</dd>
           </div>
           <div>
-            <dt>Edits Claude can see</dt>
-            <dd>Move a box or rename a label in the chat, and Claude picks up what you changed before it adds anything else.</dd>
+            <dt>Claude keeps your edits</dt>
+            <dd>Change a board by hand, give it back to Claude, and ask for more. Claude builds on your version, and the new file records which version it came from.</dd>
           </div>
           <div>
             <dt>Opens anywhere</dt>
             <dd>Any modern browser, on any computer, offline. The person you send it to needs no account and no app.</dd>
           </div>
           <div>
-            <dt>Nothing kept on our side</dt>
-            <dd>The Sabura connector builds a board and forgets it. Your boards live in your chats and your files. <a href="privacy/">Privacy details</a></dd>
+            <dt>No server in between</dt>
+            <dd>Claude builds the board itself, with the Sabura skill. Your boards never pass through Sabura, and live only in your chats and your files. <a href="privacy/">Privacy details</a></dd>
           </div>
         </dl>
       </div>
@@ -66,25 +66,40 @@
     <section class="section" id="add" aria-labelledby="add-title">
       <div class="wrap">
         <h2 id="add-title">Add Sabura to Claude</h2>
+        <h3>In the Claude app or claude.ai</h3>
         <ol class="steps">
           <li>
-            <strong>Open your connectors in Claude</strong>
-            In Claude, go to Settings, then Connectors, and choose Add custom connector.
+            <strong>Download the Sabura plugin</strong>
+            <a href="https://github.com/sabura-app/sabura-editor/releases/latest/download/sabura-skill.zip">sabura-skill.zip</a>, about 170 KB. Keep it zipped.
           </li>
           <li>
-            <strong>Paste the Sabura address</strong>
-            Name it Sabura and paste this address. Sabura needs no sign-in.
-            <div class="copy-field">
-              <input id="mcp-url" type="text" value="https://sabura-connector.fly.dev/mcp" readonly aria-label="Sabura connector address">
-              <button type="button" data-copy="mcp-url">Copy</button>
-            </div>
+            <strong>Upload it to Claude</strong>
+            In Claude, open Plugins, choose Add, then Upload plugin, and pick the zip.
           </li>
           <li>
             <strong>Ask for a board</strong>
-            Try “Draw our sign-up flow on a Sabura board.” The board opens in the chat, ready to edit.
+            Try “Draw our sign-up flow on a Sabura board.” Claude shares the board as a file. Open it in the chat to edit it, or download it.
           </li>
         </ol>
-        <p class="note">Don’t see Add custom connector? Your Claude plan or your organization may not allow custom connectors. The <a href="docs/">docs</a> cover this and other common problems.</p>
+
+        <h3>In Claude Code</h3>
+        <ol class="steps">
+          <li>
+            <strong>Add the Sabura marketplace</strong>
+            <div class="copy-field">
+              <input id="cmd-marketplace" type="text" value="/plugin marketplace add sabura-app/sabura-editor" readonly aria-label="Command to add the Sabura marketplace">
+              <button type="button" data-copy="cmd-marketplace">Copy</button>
+            </div>
+          </li>
+          <li>
+            <strong>Install the plugin</strong>
+            <div class="copy-field">
+              <input id="cmd-install" type="text" value="/plugin install sabura@sabura" readonly aria-label="Command to install the Sabura plugin">
+              <button type="button" data-copy="cmd-install">Copy</button>
+            </div>
+          </li>
+        </ol>
+        <p class="note">Sabura needs Claude to be able to run code. If Claude says it can’t, check that code execution is turned on in your Claude settings. The <a href="docs/">docs</a> cover this and other common problems.</p>
       </div>
     </section>
   </main>
@@ -108,7 +123,7 @@
       for (const frame of document.querySelectorAll('iframe[data-src]')) frame.src = frame.dataset.src;
     }));
 
-    // Copy the connector address. Falls back to selecting it where the
+    // Copy a setup command. Falls back to selecting it where the
     // clipboard is unavailable, so the visitor can copy it by hand.
     for (const button of document.querySelectorAll('[data-copy]')) {
       button.addEventListener('click', async () => {

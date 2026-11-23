@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sabura docs</title>
-  <meta name="description" content="How to add Sabura to Claude, make and edit boards, save them as files, and fix common problems.">
+  <meta name="description" content="How to add the Sabura plugin to Claude, make and edit boards, save them as files, and fix common problems.">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/site.css">
 </head>
@@ -32,61 +32,51 @@
         <a href="#setup">Add Sabura to Claude</a>
         <a href="#boards">Make and edit boards</a>
         <a href="#save">Save and share a board</a>
-        <a href="#tools">What Claude can do</a>
-        <a href="#limits">Limits</a>
+        <a href="#how">How it works</a>
         <a href="#troubleshooting">Fix common problems</a>
         <a href="#support">Get help</a>
       </nav>
 
       <h2 id="setup">Add Sabura to Claude</h2>
+      <p>Sabura is a plugin: a skill that teaches Claude to make Sabura boards, plus the editor and a small script Claude runs to build them. Nothing connects to a Sabura server.</p>
+      <h3>In the Claude app or claude.ai</h3>
       <ol>
-        <li>In Claude, go to Settings, then Connectors, and choose <strong>Add custom connector</strong>.</li>
-        <li>Name it <strong>Sabura</strong> and paste <code>https://sabura-connector.fly.dev/mcp</code>.</li>
-        <li>Leave sign-in off. Sabura has no accounts.</li>
-        <li>Choose <strong>Connect</strong>. Sabura is ready when its tools are listed.</li>
+        <li>Download <a href="https://github.com/sabura-app/sabura-editor/releases/latest/download/sabura-skill.zip">sabura-skill.zip</a>. Don’t unzip it.</li>
+        <li>In Claude, open <strong>Plugins</strong>, choose <strong>Add</strong>, then <strong>Upload plugin</strong>, and pick the zip.</li>
+        <li>Sabura is ready when it appears under Your plugins. It works in every new chat.</li>
       </ol>
-      <p>Connectors you add on claude.ai also appear in the Claude desktop app. If the desktop app doesn’t show the change, quit it fully and reopen it.</p>
+      <p>Plugins you upload on claude.ai also appear in the Claude desktop app.</p>
+      <h3>In Claude Code</h3>
+      <ol>
+        <li>Run <code>/plugin marketplace add sabura-app/sabura-editor</code>.</li>
+        <li>Run <code>/plugin install sabura@sabura</code>.</li>
+      </ol>
+      <p>To update later, run <code>/plugin marketplace update sabura</code>. On claude.ai, upload the newest zip again.</p>
 
       <h2 id="boards">Make and edit boards</h2>
-      <p>Ask Claude for a diagram and mention Sabura, for example “Draw our deployment pipeline on a Sabura board.” Claude builds the board and shows it in the chat.</p>
+      <p>Ask Claude for a diagram and mention Sabura, for example “Draw our deployment pipeline on a Sabura board.” Claude plans the layout, builds the board and shares it as an <code>.html</code> file. In the Claude app, open the file in the chat to see and edit it.</p>
       <h3>Edit by hand</h3>
-      <p>The board in the chat is the full Sabura editor. Drag shapes, double-click to change a label, and draw new shapes and arrows from the toolbar. Press <kbd>?</kbd> on the board for keyboard shortcuts.</p>
+      <p>Every board is the full Sabura editor. Choose <strong>Edit</strong>, then drag shapes, double-click to change a label, and draw new shapes and arrows from the toolbar. Press <kbd>?</kbd> on the board for keyboard shortcuts.</p>
       <h3>Ask Claude to change it</h3>
-      <p>While the board is open, Claude can read it, edit it, undo and redo, and zoom to parts of it. Claude sees the edits you made by hand first, so it builds on them instead of overwriting them. Claude asks before each change unless you allow the tool for good.</p>
+      <p>Ask in the same chat, or attach a board file to a new chat, and say what to change. Claude reads the board, changes only what you asked for, and gives you a new file. If you edited the board by hand, save a copy first and attach that, so Claude builds on your version.</p>
+      <p>In Claude Code, Claude can also open the board in a browser and edit it while you watch.</p>
 
       <h2 id="save">Save and share a board</h2>
-      <p>Choose <strong>Save Copy</strong>, the download button at the top right of the board. Claude asks you to confirm the download.</p>
-      <p>You get one <code>.html</code> file that holds the board and the editor. Open it in any modern browser, on any computer, with no internet connection. Anyone you send it to can edit it and save their own copy. The file contains no tracking and makes no network requests.</p>
+      <p>Download the file Claude shared, or choose <strong>Save Copy</strong> on the board to keep your own edits. Either way you get one <code>.html</code> file that holds the board and the editor.</p>
+      <p>Open it in any modern browser, on any computer, with no internet connection. Anyone you send it to can edit it and save their own copy. The file contains no tracking and makes no network requests.</p>
 
-      <h2 id="tools">What Claude can do</h2>
-      <table>
-        <thead><tr><th scope="col">Tool</th><th scope="col">What it does</th></tr></thead>
-        <tbody>
-          <tr><td><code>sabura_create_board</code></td><td>Creates a board from a diagram description and shows it in the chat.</td></tr>
-          <tr><td><code>sabura_open_board</code></td><td>Opens a blank board, or a board with a starting diagram.</td></tr>
-          <tr><td><code>sabura_read_board</code></td><td>Reads the open board, including your edits.</td></tr>
-          <tr><td><code>sabura_edit_board</code></td><td>Adds, changes, groups, locks or removes things on the open board.</td></tr>
-          <tr><td><code>sabura_undo</code>, <code>sabura_redo</code></td><td>Undo or redo the last change.</td></tr>
-          <tr><td><code>sabura_focus_objects</code>, <code>sabura_fit_board</code></td><td>Zoom to chosen shapes, or to the whole board.</td></tr>
-          <tr><td><code>sabura_save_copy</code></td><td>Starts Save Copy. You still confirm the download.</td></tr>
-        </tbody>
-      </table>
-      <p>Boards can hold rectangles, ellipses, diamonds, triangles, text, freehand paths, images, and arrows that stay attached when shapes move. Shapes can be grouped and locked.</p>
-
-      <h2 id="limits">Limits</h2>
-      <ul>
-        <li>A single board request can hold up to 1,000 drawing commands and 512 KB. For bigger boards, Claude creates the board and then adds the rest while it is open.</li>
-        <li>Building a board stops after 10 seconds. Requests over that get an error Claude can act on.</li>
-        <li>The connector accepts about 120 requests a minute. Because Claude’s requests come from shared addresses, that allowance is shared between people using Sabura through Claude.</li>
-      </ul>
+      <h2 id="how">How it works</h2>
+      <p>Claude writes the board as a list of drawing commands, such as shapes, labels, arrows and frames, and runs the Sabura script on them. The script checks every command with the same rules as the editor, and packs the board and the editor into one file. If a command is wrong, the script refuses the whole batch, names each problem, and writes nothing, so Claude can fix it and try again.</p>
+      <p>Boards can hold rectangles, ellipses, diamonds, triangles, text, freehand paths, images, arrows with labels that stay attached when shapes move, and framed groups. Shapes can be grouped and locked.</p>
+      <p>Each new version of a board records the version it came from, so you can tell copies apart.</p>
 
       <h2 id="troubleshooting">Fix common problems</h2>
-      <h3>“Two of your connectors have names Claude can’t tell apart”</h3>
-      <p>More than one connector is named Sabura, often an old copy left after re-adding it. In Settings, then Connectors, remove every Sabura entry whose address isn’t <code>https://sabura-connector.fly.dev/mcp</code>. In the desktop app, quit it fully and reopen it.</p>
-      <h3>“Connection to server failed”</h3>
-      <p>Claude couldn’t reach a connector. Check that your Sabura entry uses the address above, then try again. If it keeps happening, remove and re-add the connector, then restart the desktop app.</p>
-      <h3>“The board server is busy”</h3>
-      <p>Too many boards are being built at once. Wait a few seconds and ask again.</p>
+      <h3>Claude says it can’t run code</h3>
+      <p>Sabura needs Claude to run its script. Check that code execution is turned on in your Claude settings. Your plan or your organization may not allow it.</p>
+      <h3>Claude draws a picture instead of a Sabura board</h3>
+      <p>Mention Sabura in your request, for example “on a Sabura board”, and check that Sabura is listed under Plugins.</p>
+      <h3>You added the old Sabura connector</h3>
+      <p>Before version 1.1, Sabura was a connector at <code>sabura-connector.fly.dev</code>. That server has been shut down. Remove the old Sabura connector from Plugins, where it shows as a custom connector, so Claude doesn’t try to use it.</p>
       <h3>A change was refused</h3>
       <p>Sabura refuses a drawing command it doesn’t recognize instead of silently ignoring it, and the message names the problem field. Claude usually corrects the command and retries on its own.</p>
 

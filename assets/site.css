@@ -115,6 +115,8 @@ img, svg, iframe { max-width: 100%; }
   padding: 10px 14px; border-radius: 8px; border: 2px solid var(--ink);
   background: var(--surface); color: var(--ink); font: 600 15px var(--font); cursor: pointer;
 }
+.section h3 { margin: 32px 0 16px; font-size: 20px; }
+.section h3:first-of-type { margin-top: 0; }
 .note { color: var(--graphite); font-size: 15px; }
 
 /* Reading pages (docs, privacy) */
