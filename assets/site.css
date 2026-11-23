@@ -34,9 +34,33 @@
   --measure: 66ch;
   color-scheme: light;
 }
+/* Dark: the night board and the editor's dark chrome. Follows the system
+   unless the visitor picked a theme (data-theme, set by assets/theme.js). */
+:root[data-theme="dark"] {
+  --paper: #18181b;
+  --dot: rgba(255, 255, 255, 0.075);
+  --ink: #f4f4f5;
+  --text: #edf0f0;
+  --muted: #b6bec5;
+  --link: #7aa2f7;
+  --rail: #2b2f33;
+  --rail-border: #687078;
+  --rail-shadow: rgba(237, 240, 240, 0.22);
+  --hover: #4a4540;
+  --active: #414b70;
+  --accent: #c1c8ff;
+  --frame-line: rgba(244, 244, 245, 0.35);
+  --frame-fill: rgba(244, 244, 245, 0.035);
+
+  --sk-box: url("sketch/box-dark.svg");
+  --sk-box-alt: url("sketch/box-alt-dark.svg");
+  --sk-ring: url("sketch/ring-dark.svg");
+  --sk-arrow: url("sketch/arrow-dark.svg");
+  --sk-wash-yellow: url("sketch/wash-yellow-dark.svg");
+  color-scheme: dark;
+}
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* Night board and the editor's dark chrome */
+  :root:not([data-theme="light"]) {
     --paper: #18181b;
     --dot: rgba(255, 255, 255, 0.075);
     --ink: #f4f4f5;
@@ -123,6 +147,7 @@ img, svg, iframe { max-width: 100%; }
 .rail > a:hover,
 .rail > button:hover { background: var(--hover); }
 .rail > a[aria-current="page"] { background: var(--active); color: var(--accent); }
+.rail > button.theme-toggle { padding: 0 12px; }
 .rail > a:focus-visible,
 .rail > button:focus-visible { outline: 2px solid var(--link); outline-offset: -3px; border-radius: 0; }
 
@@ -292,8 +317,11 @@ kbd {
   .section { padding-block: 40px; }
 }
 @media (max-width: 420px) {
-  .rail > a, .rail > button { padding: 0 10px; }
-  .rail > a.brand { padding-left: 8px; }
+  .site-header .wrap { gap: 6px; }
+  .rail > a, .rail > button { padding: 0 8px; font-size: 13px; }
+  .rail > button.theme-toggle { padding: 0 8px; }
+  .rail > a.brand { padding-left: 7px; font-size: 17px; gap: 7px; }
+  .brand svg { width: 24px; height: 24px; }
   .facts > div { padding: 22px 22px 24px; }
   .frame { padding: 14px 16px 18px; }
 }
