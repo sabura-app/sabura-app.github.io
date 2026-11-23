@@ -113,20 +113,20 @@ PUBLIC API  (window.sabura.*)
   "groups": {},
   "id": "board_site_demo",
   "objects": {
-    "ask": {
+    "agent": {
       "fill": "none",
       "groupId": null,
-      "height": 84,
-      "id": "ask",
+      "height": 110,
+      "id": "agent",
       "locked": false,
       "opacity": 1,
       "rotation": 0,
       "roughness": 1,
-      "seed": 11,
+      "seed": 581,
       "stroke": "#1e1e1e",
       "strokeStyle": "solid",
       "strokeWidth": 2,
-      "text": "You ask Claude for a diagram",
+      "text": "Claude or your own agent can edit it too",
       "textStyle": {
         "align": "center",
         "bold": false,
@@ -135,17 +135,17 @@ PUBLIC API  (window.sabura.*)
         "resolvedSize": 20,
         "size": "m"
       },
-      "type": "rectangle",
-      "width": 190,
-      "x": 0,
-      "y": 0
+      "type": "ellipse",
+      "width": 250,
+      "x": 240,
+      "y": 330
     },
     "c1": {
       "curveSide": 1,
       "endArrow": true,
       "fill": "none",
       "from": {
-        "id": "ask"
+        "id": "file"
       },
       "groupId": null,
       "id": "c1",
@@ -154,7 +154,7 @@ PUBLIC API  (window.sabura.*)
       "rotation": 0,
       "roughness": 1,
       "routing": "straight",
-      "seed": 608220501,
+      "seed": 1506625985,
       "startArrow": false,
       "stroke": "#1e1e1e",
       "strokeStyle": "solid",
@@ -169,7 +169,7 @@ PUBLIC API  (window.sabura.*)
         "size": "m"
       },
       "to": {
-        "id": "draw"
+        "id": "open"
       },
       "type": "connector"
     },
@@ -178,7 +178,7 @@ PUBLIC API  (window.sabura.*)
       "endArrow": true,
       "fill": "none",
       "from": {
-        "id": "draw"
+        "id": "open"
       },
       "groupId": null,
       "id": "c2",
@@ -187,7 +187,7 @@ PUBLIC API  (window.sabura.*)
       "rotation": 0,
       "roughness": 1,
       "routing": "straight",
-      "seed": 1855764345,
+      "seed": 1632061023,
       "startArrow": false,
       "stroke": "#1e1e1e",
       "strokeStyle": "solid",
@@ -220,7 +220,7 @@ PUBLIC API  (window.sabura.*)
       "rotation": 0,
       "roughness": 1,
       "routing": "straight",
-      "seed": 616398291,
+      "seed": 58585353,
       "startArrow": false,
       "stroke": "#1e1e1e",
       "strokeStyle": "solid",
@@ -244,7 +244,7 @@ PUBLIC API  (window.sabura.*)
       "endArrow": true,
       "fill": "none",
       "from": {
-        "id": "save"
+        "id": "agent"
       },
       "groupId": null,
       "id": "c4",
@@ -253,7 +253,7 @@ PUBLIC API  (window.sabura.*)
       "rotation": 0,
       "roughness": 1,
       "routing": "straight",
-      "seed": 434907593,
+      "seed": 1608068475,
       "startArrow": false,
       "stroke": "#1e1e1e",
       "strokeStyle": "solid",
@@ -268,36 +268,9 @@ PUBLIC API  (window.sabura.*)
         "size": "m"
       },
       "to": {
-        "id": "open"
+        "id": "edit"
       },
       "type": "connector"
-    },
-    "draw": {
-      "fill": "none",
-      "groupId": null,
-      "height": 84,
-      "id": "draw",
-      "locked": false,
-      "opacity": 1,
-      "rotation": 0,
-      "roughness": 1,
-      "seed": 271,
-      "stroke": "#1e1e1e",
-      "strokeStyle": "solid",
-      "strokeWidth": 2,
-      "text": "Claude draws it on a Sabura board",
-      "textStyle": {
-        "align": "center",
-        "bold": false,
-        "color": "#1e1e1e",
-        "fontFamily": "hand",
-        "resolvedSize": 20,
-        "size": "m"
-      },
-      "type": "rectangle",
-      "width": 190,
-      "x": 260,
-      "y": 0
     },
     "edit": {
       "fill": "none",
@@ -308,11 +281,11 @@ PUBLIC API  (window.sabura.*)
       "opacity": 1,
       "rotation": 0,
       "roughness": 1,
-      "seed": 531,
+      "seed": 451,
       "stroke": "#1e1e1e",
       "strokeStyle": "solid",
       "strokeWidth": 2,
-      "text": "You move, rename and add things",
+      "text": "Move, rename and add things",
       "textStyle": {
         "align": "center",
         "bold": false,
@@ -323,7 +296,34 @@ PUBLIC API  (window.sabura.*)
       },
       "type": "rectangle",
       "width": 190,
-      "x": 520,
+      "x": 270,
+      "y": 170
+    },
+    "file": {
+      "fill": "none",
+      "groupId": null,
+      "height": 84,
+      "id": "file",
+      "locked": false,
+      "opacity": 1,
+      "rotation": 0,
+      "roughness": 1,
+      "seed": 11,
+      "stroke": "#1e1e1e",
+      "strokeStyle": "solid",
+      "strokeWidth": 2,
+      "text": "A board is one HTML file",
+      "textStyle": {
+        "align": "center",
+        "bold": false,
+        "color": "#1e1e1e",
+        "fontFamily": "hand",
+        "resolvedSize": 20,
+        "size": "m"
+      },
+      "type": "rectangle",
+      "width": 190,
+      "x": 0,
       "y": 0
     },
     "note": {
@@ -349,51 +349,24 @@ PUBLIC API  (window.sabura.*)
         "size": "m"
       },
       "type": "text",
-      "width": 300,
+      "width": 340,
       "x": 0,
-      "y": 320
+      "y": 470
     },
     "open": {
       "fill": "none",
       "groupId": null,
-      "height": 110,
+      "height": 84,
       "id": "open",
       "locked": false,
       "opacity": 1,
       "rotation": 0,
       "roughness": 1,
-      "seed": 401,
+      "seed": 281,
       "stroke": "#1e1e1e",
       "strokeStyle": "solid",
       "strokeWidth": 2,
-      "text": "Anyone opens it in a browser, offline",
-      "textStyle": {
-        "align": "center",
-        "bold": false,
-        "color": "#1e1e1e",
-        "fontFamily": "hand",
-        "resolvedSize": 20,
-        "size": "m"
-      },
-      "type": "ellipse",
-      "width": 240,
-      "x": 230,
-      "y": 160
-    },
-    "save": {
-      "fill": "#fff3b0",
-      "groupId": null,
-      "height": 84,
-      "id": "save",
-      "locked": false,
-      "opacity": 1,
-      "rotation": 0,
-      "roughness": 1,
-      "seed": 701,
-      "stroke": "#1e1e1e",
-      "strokeStyle": "solid",
-      "strokeWidth": 2,
-      "text": "Save Copy gives you one HTML file",
+      "text": "Open it in any browser, even offline",
       "textStyle": {
         "align": "center",
         "bold": false,
@@ -404,16 +377,43 @@ PUBLIC API  (window.sabura.*)
       },
       "type": "rectangle",
       "width": 190,
-      "x": 520,
+      "x": 270,
+      "y": 0
+    },
+    "save": {
+      "fill": "#fff3b0",
+      "groupId": null,
+      "height": 84,
+      "id": "save",
+      "locked": false,
+      "opacity": 1,
+      "rotation": 0,
+      "roughness": 1,
+      "seed": 181,
+      "stroke": "#1e1e1e",
+      "strokeStyle": "solid",
+      "strokeWidth": 2,
+      "text": "Save Copy and send it to anyone",
+      "textStyle": {
+        "align": "center",
+        "bold": false,
+        "color": "#1e1e1e",
+        "fontFamily": "hand",
+        "resolvedSize": 20,
+        "size": "m"
+      },
+      "type": "rectangle",
+      "width": 190,
+      "x": 0,
       "y": 170
     }
   },
   "order": [
-    "ask",
-    "draw",
+    "file",
+    "open",
     "edit",
     "save",
-    "open",
+    "agent",
     "c1",
     "c2",
     "c3",

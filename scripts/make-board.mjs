@@ -11,16 +11,16 @@ const { packageHtmlWithDocument } = await import(new URL('src/storage/file-packe
 const box = (id, x, y, text, extra = {}) => ({ type: 'create_object', object: { id, type: 'rectangle', x, y, width: 190, height: 84, text, seed: 11 + x + y, ...extra } });
 const link = (connectorId, fromId, toId) => ({ type: 'connect_objects', connectorId, fromId, toId });
 const commands = [
-  box('ask', 0, 0, 'You ask Claude for a diagram'),
-  box('draw', 260, 0, 'Claude draws it on a Sabura board'),
-  box('edit', 520, 0, 'You move, rename and add things'),
-  box('save', 520, 170, 'Save Copy gives you one HTML file', { fill: '#fff3b0' }),
-  box('open', 230, 160, 'Anyone opens it in a browser, offline', { type: 'ellipse', width: 240, height: 110 }),
-  link('c1', 'ask', 'draw'),
-  link('c2', 'draw', 'edit'),
+  box('file', 0, 0, 'A board is one HTML file'),
+  box('open', 270, 0, 'Open it in any browser, even offline'),
+  box('edit', 270, 170, 'Move, rename and add things'),
+  box('save', 0, 170, 'Save Copy and send it to anyone', { fill: '#fff3b0' }),
+  box('agent', 240, 330, 'Claude or your own agent can edit it too', { type: 'ellipse', width: 250, height: 110 }),
+  link('c1', 'file', 'open'),
+  link('c2', 'open', 'edit'),
   link('c3', 'edit', 'save'),
-  link('c4', 'save', 'open'),
-  { type: 'create_object', object: { id: 'note', type: 'text', x: 0, y: 320, width: 300, height: 40, text: 'This board is a real Sabura file. Drag a box.', seed: 5 } },
+  link('c4', 'agent', 'edit'),
+  { type: 'create_object', object: { id: 'note', type: 'text', x: 0, y: 470, width: 340, height: 40, text: 'This board is a real Sabura file. Drag a box.', seed: 5 } },
 ];
 let doc = normalizeDocument(createDefaultDocument({ id: 'board_site_demo', title: 'How Sabura works' }));
 doc.title = 'How Sabura works';
