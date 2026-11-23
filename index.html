@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sabura: diagrams Claude draws, in a file you keep</title>
-  <meta name="description" content="Sabura is a whiteboard for Claude. Ask for a diagram and get one HTML file anyone can open, edit and share. No account, no server, works offline.">
+  <title>Sabura: a whiteboard that lives in one file</title>
+  <meta name="description" content="Sabura boards are single HTML files with the editor built in. Open one in any browser, edit it, send it on. No install, no account, no server, works offline, and any AI agent can read and edit it.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -26,11 +26,11 @@
   <main>
     <section class="wrap hero" aria-labelledby="hero-title">
       <div>
-        <h1 id="hero-title">Diagrams Claude draws, in a file you keep.</h1>
-        <p class="lede">Sabura is a whiteboard for Claude. Ask for a diagram and Claude hands you one HTML file: it opens as a working editor, in the chat or in any browser, and anyone can edit it and pass it on. No account, no server, works offline.</p>
+        <h1 id="hero-title">A whiteboard that lives in one file.</h1>
+        <p class="lede">Sabura boards are single HTML files with the editor built in. Open one in any browser, edit it, send it on. No install, no account, no server, works offline. And any AI agent can read and edit it, so Claude, or your own agent, can draw with you.</p>
         <div class="actions">
-          <a class="button" href="#add">Add Sabura to Claude</a>
-          <a href="https://sabura-app.github.io/sabura-editor/">Or start a blank board</a>
+          <a class="button" href="https://sabura-app.github.io/sabura-editor/">Start a board</a>
+          <a href="#ai">Use it with AI</a>
         </div>
       </div>
       <figure class="board-frame">
@@ -48,8 +48,8 @@
             <dd>Save Copy writes the board and the editor into a single HTML file. Open it years from now and it still works, with no service behind it.</dd>
           </div>
           <div>
-            <dt>Claude keeps your edits</dt>
-            <dd>Change a board by hand, give it back to Claude, and ask for more. Claude builds on your version, and the new file records which version it came from.</dd>
+            <dt>Agents build on your edits</dt>
+            <dd>Change a board by hand, give it back to Claude or your own agent, and ask for more. It builds on your version, and the new file records which version it came from.</dd>
           </div>
           <div>
             <dt>Opens anywhere</dt>
@@ -57,16 +57,17 @@
           </div>
           <div>
             <dt>No server in between</dt>
-            <dd>Claude builds the board itself, with the Sabura skill. Your boards never pass through Sabura, and live only in your chats and your files. <a href="privacy/">Privacy details</a></dd>
+            <dd>Boards live in your files and your chats. Sabura has no server, so your boards never pass through it. <a href="privacy/">Privacy details</a></dd>
           </div>
         </dl>
       </div>
     </section>
 
-    <section class="section" id="add" aria-labelledby="add-title">
+    <section class="section" id="ai" aria-labelledby="ai-title">
       <div class="wrap">
-        <h2 id="add-title">Add Sabura to Claude</h2>
-        <h3>In the Claude app or claude.ai</h3>
+        <h2 id="ai-title">Use it with AI</h2>
+        <p class="section-intro">Every board carries an agent API, so an AI agent can read it, edit it and check its work through the editor's own rules. Claude has a ready-made plugin; other agents can use the API directly.</p>
+        <h3>Claude app or claude.ai</h3>
         <ol class="steps">
           <li>
             <strong>Download the Sabura plugin</strong>
@@ -82,7 +83,7 @@
           </li>
         </ol>
 
-        <h3>In Claude Code</h3>
+        <h3>Claude Code</h3>
         <ol class="steps">
           <li>
             <strong>Add the Sabura marketplace</strong>
@@ -100,6 +101,9 @@
           </li>
         </ol>
         <p class="note">Sabura needs Claude to be able to run code. If Claude says it can’t, check that code execution is turned on in your Claude settings. The <a href="docs/">docs</a> cover this and other common problems.</p>
+
+        <h3>Your own agent</h3>
+        <p class="section-intro">Open a board in a browser your agent controls and use <code>window.sabura.agent</code>: read the board, apply checked edits in one step, undo, and save a copy. See the <a href="https://github.com/sabura-app/sabura-editor/blob/main/docs/agent-api.md">agent API guide</a>. Without a browser, the <a href="https://github.com/sabura-app/sabura-editor#use-with-claude"><code>sabura-board</code> command-line tool</a> builds and edits board files with the same checks.</p>
       </div>
     </section>
   </main>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sabura docs</title>
-  <meta name="description" content="How to add the Sabura plugin to Claude, make and edit boards, save them as files, and fix common problems.">
+  <meta name="description" content="How to make, edit and share Sabura boards, use them with Claude or your own AI agent, and fix common problems.">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/site.css">
 </head>
@@ -26,44 +26,49 @@
   <main class="wrap page">
     <article>
       <h1>Sabura docs</h1>
-      <p class="meta">How to set Sabura up in Claude, work with boards, and save them.</p>
+      <p class="meta">How to make and share boards, and use them with AI.</p>
 
       <nav class="toc" aria-label="On this page">
-        <a href="#setup">Add Sabura to Claude</a>
         <a href="#boards">Make and edit boards</a>
         <a href="#save">Save and share a board</a>
+        <a href="#ai">Use Sabura with AI</a>
         <a href="#how">How it works</a>
         <a href="#troubleshooting">Fix common problems</a>
         <a href="#support">Get help</a>
       </nav>
 
-      <h2 id="setup">Add Sabura to Claude</h2>
-      <p>Sabura is a plugin: a skill that teaches Claude to make Sabura boards, plus the editor and a small script Claude runs to build them. Nothing connects to a Sabura server.</p>
-      <h3>In the Claude app or claude.ai</h3>
+      <h2 id="boards">Make and edit boards</h2>
+      <p>Open the <a href="https://sabura-app.github.io/sabura-editor/">Sabura editor</a> and start drawing, or open any Sabura board file in your browser. Every board is the full editor: choose <strong>Edit</strong>, then drag shapes, double-click to change a label, and draw new shapes and arrows from the toolbar. Press <kbd>?</kbd> on the board for keyboard shortcuts.</p>
+      <p>You can also ask an AI agent to draw or change a board for you. See <a href="#ai">Use Sabura with AI</a>.</p>
+
+      <h2 id="save">Save and share a board</h2>
+      <p>Choose <strong>Save Copy</strong> to keep your changes. You get one <code>.html</code> file that holds the board and the editor.</p>
+      <p>Open it in any modern browser, on any computer, with no internet connection. Anyone you send it to can edit it and save their own copy. The file contains no tracking and makes no network requests.</p>
+
+      <h2 id="ai">Use Sabura with AI</h2>
+      <p>Every board carries an agent API, so an AI agent can read it, edit it and check its work against the editor’s own rules. Nothing connects to a Sabura server.</p>
+
+      <h3 id="setup">Claude</h3>
+      <p>The Sabura plugin teaches Claude to make and edit boards: a skill, the editor, and a small script Claude runs to build board files.</p>
+      <p><strong>Claude app or claude.ai</strong></p>
       <ol>
         <li>Download <a href="https://github.com/sabura-app/sabura-editor/releases/latest/download/sabura-plugin.zip">sabura-plugin.zip</a>. Don’t unzip it.</li>
         <li>In Claude, open <strong>Plugins</strong>, choose <strong>Add</strong>, then <strong>Upload plugin</strong>, and pick the zip.</li>
         <li>Sabura is ready when it appears under Your plugins. It works in every new chat.</li>
       </ol>
       <p>Plugins you upload on claude.ai also appear in the Claude desktop app.</p>
-      <h3>In Claude Code</h3>
+      <p><strong>Claude Code</strong></p>
       <ol>
         <li>Run <code>/plugin marketplace add sabura-app/sabura-editor</code>.</li>
         <li>Run <code>/plugin install sabura@sabura</code>.</li>
       </ol>
       <p>To update later, run <code>/plugin marketplace update sabura</code>. On claude.ai, upload the newest zip again.</p>
+      <p><strong>Asking Claude</strong></p>
+      <p>Ask for a diagram and mention Sabura, for example “Draw our deployment pipeline on a Sabura board.” Claude plans the layout, builds the board and shares it as an <code>.html</code> file. In the Claude app, open the file in the chat to see and edit it.</p>
+      <p>To change a board, ask in the same chat, or attach a board file to a new chat, and say what to change. Claude changes only what you asked for and gives you a new file. If you edited the board by hand, save a copy first and attach that, so Claude builds on your version. In Claude Code, Claude can also open the board in a browser and edit it while you watch.</p>
 
-      <h2 id="boards">Make and edit boards</h2>
-      <p>Ask Claude for a diagram and mention Sabura, for example “Draw our deployment pipeline on a Sabura board.” Claude plans the layout, builds the board and shares it as an <code>.html</code> file. In the Claude app, open the file in the chat to see and edit it.</p>
-      <h3>Edit by hand</h3>
-      <p>Every board is the full Sabura editor. Choose <strong>Edit</strong>, then drag shapes, double-click to change a label, and draw new shapes and arrows from the toolbar. Press <kbd>?</kbd> on the board for keyboard shortcuts.</p>
-      <h3>Ask Claude to change it</h3>
-      <p>Ask in the same chat, or attach a board file to a new chat, and say what to change. Claude reads the board, changes only what you asked for, and gives you a new file. If you edited the board by hand, save a copy first and attach that, so Claude builds on your version.</p>
-      <p>In Claude Code, Claude can also open the board in a browser and edit it while you watch.</p>
-
-      <h2 id="save">Save and share a board</h2>
-      <p>Download the file Claude shared, or choose <strong>Save Copy</strong> on the board to keep your own edits. Either way you get one <code>.html</code> file that holds the board and the editor.</p>
-      <p>Open it in any modern browser, on any computer, with no internet connection. Anyone you send it to can edit it and save their own copy. The file contains no tracking and makes no network requests.</p>
+      <h3>Your own agent</h3>
+      <p>Open a board in a browser your agent controls and use <code>window.sabura.agent</code>: read the board, apply checked edits in one atomic step, undo and redo, and save a copy. The <a href="https://github.com/sabura-app/sabura-editor/blob/main/docs/agent-api.md">agent API guide</a> has the details. Without a browser, the <code>sabura-board</code> command-line tool in the <a href="https://github.com/sabura-app/sabura-editor">source repository</a> builds and edits board files with the same checks.</p>
 
       <h2 id="how">How it works</h2>
       <p>Claude writes the board as a list of drawing commands, such as shapes, labels, arrows and frames, and runs the Sabura script on them. The script checks every command with the same rules as the editor, and packs the board and the editor into one file. If a command is wrong, the script refuses the whole batch, names each problem, and writes nothing, so Claude can fix it and try again.</p>
